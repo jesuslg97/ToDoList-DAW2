@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todolist-daw2": {
+      "hosting": {
+        "TodoList": [
+          "todolist-daw2"
+        ]
+      }
+    }
+  }
+}
