@@ -9,15 +9,35 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Toolbar component
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+
+// Form component
+import { FormComponent } from './form/form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { IndexComponent } from './index/index.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolbarComponent,
+    FormComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    FlexLayoutModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

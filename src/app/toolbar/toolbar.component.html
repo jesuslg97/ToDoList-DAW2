@@ -1,0 +1,15 @@
+<mat-toolbar fxLayout="row" color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>ToDo List - DAW2</span>
+
+  <button mat-button fxShow.xs=true [routerLink]="['form']">
+    <mat-icon class="mr">note_add</mat-icon>
+    Añadir tarea
+  </button>
+  <button mat-button fxShow.xs=false fxShow.sm=false [routerLink]="['/index']">
+    <mat-icon class="mr">sticky_note_2</mat-icon>
+    Tareas
+  </button>
+</mat-toolbar>
