@@ -1,26 +1,23 @@
-<div class="top mt-3">
-  <div class="titulo">
-    <h1>Histórico de Tareas completadas</h1>
-  </div>
+<div class="mt-3 text-center">
+    <h1>Tareas completadas</h1>
+  <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto border-dark" style="width: 200px;">
 </div>
-
-<!--<mat-divider class="mt-1 mb-3"></mat-divider>-->
 
 <h3 *ngIf="completed.length===0" class="noTareas">No se han completado tareas, ¡A trabajar!</h3>
 
 <div class="lista mat-typography">
-  <div class="tarea" *ngFor="let tarea of completed">
+  <div class="tarea" *ngFor="let activity of completed">
     <div class="top-side">
       <div class="task">
-        <h1>{{tarea.title}}</h1>
-        <h4>{{tarea.description}}</h4>
+        <h1>{{activity.title}}</h1>
+        <h4>{{activity.description}}</h4>
       </div>
       <div class="task-info">
-        <p>Completada: {{tarea.date | date:'MMM d, y, HH:mm'}}</p>
+        <p>Completada: {{activity.date | date:'HH:mm - d MMM - y'}}</p>
       </div>
     </div>
     <div class="bot-side">
-      <button class=" btn btn-sm btn-danger" (click)="delete(tarea.id)">Eliminar</button>
+      <button class="btn btn-sm btn-danger" (click)="delete(activity.id)">Eliminar</button>
     </div>
   </div>
 </div>

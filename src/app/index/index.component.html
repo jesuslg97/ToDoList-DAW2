@@ -1,38 +1,41 @@
 <div class="row justify-content-center mt-3">
-  <div class="titulo col-md-4">
-    <h1>Lista de Tareas pendientes</h1>
+  <div class="col-md-4 text-center">
+    <h1>Lista de Tareas</h1>
+    <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto border-dark" style="width: 200px;">
   </div>
-  <div class="controls col-md-4">
-    <p>Ordenar por:</p>
-    <button mat-flat-button color="primary" class="controlButtons" (click)="activityOrder(0)" [ngClass]="{'active':order===0}">Título</button>
-    <button mat-flat-button color="primary" class="controlButtons" (click)="activityOrder(1)" [ngClass]="{'active':order===1}">Fecha</button>
-    <button mat-flat-button color="primary" class="controlButtons" (click)="activityOrder(2)" [ngClass]="{'active':order===2}">Prioridad</button>
-  </div>
-  <div class="controls col-md-4">
-    <p>Filtrar por:</p>
-    <button mat-flat-button color="primary" class="controlButtons" (click)="activityFilter(0)" [ngClass]="{'active':filter===0}">Todas</button>
-    <button mat-flat-button color="primary" class="controlButtons" (click)="activityFilter(1)" [ngClass]="{'active':filter===1}">Pendientes</button>
-    <button mat-flat-button color="primary" class="controlButtons" (click)="activityFilter(2)" [ngClass]="{'active':filter===2}">En proceso</button>
+
+  <div class="row text-center">
+
+    <div class="col-md-4">
+      <mat-form-field appearance="fill" style="margin-right: 5%">
+        <mat-label>Ordenar por:</mat-label>
+        <select matNativeControl>
+          <option value="Default" selected>Default</option>
+          <option (click)="activityOrder(0)" value="Título">Título</option>
+          <option (click)="activityOrder(1)" value="Fecha">Fecha</option>
+          <option (click)="activityOrder(2)" value="Prioridad">Prioridad</option>
+        </select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Filtrar por:</mat-label>
+        <select matNativeControl>
+          <option value="Default" selected>Default</option>
+          <option (click)="activityFilter(0)" value="Todas">Todas</option>
+          <option (click)="activityFilter(1)" value="Pendientes">Pendientes</option>
+          <option (click)="activityFilter(2)" value="En proceso">En proceso</option>
+        </select>
+      </mat-form-field>
+    </div>
+
   </div>
 
 </div>
 
-<!--<mat-divider class="mt-1 mb-3"></mat-divider>-->
-
 <h3 *ngIf="activities.length===0" class="noTareas">No hay tareas pendientes, ¡Felicidades!</h3>
 
 <div class="lista mat-typography">
-  <div class="tarea" *ngFor="let activity of activities"
-       [ngClass]="{
-            'incompleta':activity.status===0,
-            'proceso':activity.status===1,
-            'filtroPendientes':filter===1 && activity.status!=0,
-            'filtroProceso':filter===2 && activity.status!=1
-        }">
-
-    <button mat-icon-button class="fixr" (click)="deleteActivity(activity.id)">
-      <mat-icon>close</mat-icon>
-    </button>
+  <div class="tarea" *ngFor="let activity of activities">
 
     <div class="top-side">
       <div class="task">
@@ -40,22 +43,18 @@
         <h4>{{activity.description}}</h4>
       </div>
 
-      <div class="task-info"
-           [ngClass]="{
-                'incompleta-info':activity.status===0,
-                'proceso-info':activity.status===1}"
-      >
+      <div class="task-info">
         <p>Prioridad: {{activity.priority}}</p>
-        <p *ngIf="activity.status===0">Pendiente</p>
-        <p *ngIf="activity.status===1">En proceso</p>
-        <p>Creada: {{activity.date | date:'MMM d, y, HH:mm'}}</p>
+        <p *ngIf="activity.status===0">Estado: Pendiente</p>
+        <p *ngIf="activity.status===1">Estado: En proceso</p>
+        <p>Fecha: {{activity.date | date:'HH:mm - d MMM - y'}}</p>
       </div>
     </div>
     <div class="bot-side">
-      <button *ngIf="activity.status===0" class=" btn btn-sm start white mr-1" (click)="process(activity)">Comenzar</button>
-      <button *ngIf="activity.status===1" class=" btn btn-sm pause white mr-1" (click)="process(activity)">Pausar</button>
-      <button class=" btn btn-sm white edit mr-1" (click)="openEditDialog(activity)">Editar</button>
-      <button class=" btn btn-sm complete white" (click)="complete(activity)">Completar</button>
+      <button *ngIf="activity.status===0" style="margin-right: 5px" class="btn btn-sm btn-info" (click)="process(activity)">Comenzar</button>
+      <button *ngIf="activity.status===1" style="margin-right: 5px" class="btn btn-sm btn-warning" (click)="process(activity)">Pausar</button>
+      <button style="margin-right: 5px" class="btn btn-sm btn-dark" (click)="complete(activity)">Completar</button>
+      <button class="btn btn-sm btn-success" (click)="openEditDialog(activity)">Editar</button>
     </div>
   </div>
 </div>
