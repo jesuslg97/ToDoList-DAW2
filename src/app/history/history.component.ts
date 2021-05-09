@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TareaServiceService } from '../services/tarea-service.service';
-import { Tarea } from '../models/tarea.model';
+import { Activity } from '../models/activity.model';
 
 @Component({
   selector: 'app-history',
@@ -10,7 +10,7 @@ import { Tarea } from '../models/tarea.model';
 })
 export class HistoryComponent implements OnInit {
 
-  completed: Tarea[];
+  completed: Activity[];
 
   constructor(private ts: TareaServiceService) { }
 
@@ -20,11 +20,11 @@ export class HistoryComponent implements OnInit {
 
   getAll(){
     this.ts.getCompleted().subscribe((res) => {
-      this.completed = res.map((tarea) => {
+      this.completed = res.map((activity) => {
         return {
-          ...tarea.payload.doc.data() as {},
-          id: tarea.payload.doc.id
-        } as Tarea;
+          ...activity.payload.doc.data() as {},
+          id: activity.payload.doc.id
+        } as Activity;
       });
     });
   }

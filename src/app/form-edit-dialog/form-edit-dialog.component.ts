@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Tarea} from '../models/tarea.model';
+import { Activity} from '../models/activity.model';
 
 @Component({
   selector: 'app-form-edit-dialog',
@@ -16,9 +16,9 @@ export class FormEditDialogComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public tarea: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public activity: any) {
     this.form = new FormGroup({
-      title: new FormControl('',[
+      title: new FormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
@@ -34,9 +34,9 @@ export class FormEditDialogComponent implements OnInit {
   }
 
   formValidate(){
-    this.form.value.status = this.tarea.status;
+    this.form.value.status = this.activity.status;
     this.form.value.date = Date.now();
-    this.form.value.id = this.tarea.id;
+    this.form.value.id = this.activity.id;
     return this.form.value;
   }
 

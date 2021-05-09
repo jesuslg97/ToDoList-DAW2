@@ -19,43 +19,43 @@
 
 <!--<mat-divider class="mt-1 mb-3"></mat-divider>-->
 
-<h3 *ngIf="tareas.length===0" class="noTareas">No hay tareas pendientes, ¡Felicidades!</h3>
+<h3 *ngIf="activities.length===0" class="noTareas">No hay tareas pendientes, ¡Felicidades!</h3>
 
 <div class="lista mat-typography">
-  <div class="tarea" *ngFor="let tarea of tareas"
+  <div class="tarea" *ngFor="let activity of activities"
        [ngClass]="{
-            'incompleta':tarea.status===0,
-            'proceso':tarea.status===1,
-            'filtroPendientes':filter===1 && tarea.status!=0,
-            'filtroProceso':filter===2 && tarea.status!=1
+            'incompleta':activity.status===0,
+            'proceso':activity.status===1,
+            'filtroPendientes':filter===1 && activity.status!=0,
+            'filtroProceso':filter===2 && activity.status!=1
         }">
 
-    <button mat-icon-button class="fixr" (click)="deleteActivity(tarea.id)">
+    <button mat-icon-button class="fixr" (click)="deleteActivity(activity.id)">
       <mat-icon>close</mat-icon>
     </button>
 
     <div class="top-side">
       <div class="task">
-        <h1>{{tarea.title}}</h1>
-        <h4>{{tarea.description}}</h4>
+        <h1>{{activity.title}}</h1>
+        <h4>{{activity.description}}</h4>
       </div>
 
       <div class="task-info"
            [ngClass]="{
-                'incompleta-info':tarea.status===0,
-                'proceso-info':tarea.status===1}"
+                'incompleta-info':activity.status===0,
+                'proceso-info':activity.status===1}"
       >
-        <p>Prioridad: {{tarea.priority}}</p>
-        <p *ngIf="tarea.status===0">Pendiente</p>
-        <p *ngIf="tarea.status===1">En proceso</p>
-        <p>Creada: {{tarea.date | date:'MMM d, y, HH:mm'}}</p>
+        <p>Prioridad: {{activity.priority}}</p>
+        <p *ngIf="activity.status===0">Pendiente</p>
+        <p *ngIf="activity.status===1">En proceso</p>
+        <p>Creada: {{activity.date | date:'MMM d, y, HH:mm'}}</p>
       </div>
     </div>
     <div class="bot-side">
-      <button *ngIf="tarea.status===0" class=" btn btn-sm start white mr-1" (click)="process(tarea)">Comenzar</button>
-      <button *ngIf="tarea.status===1" class=" btn btn-sm pause white mr-1" (click)="process(tarea)">Pausar</button>
-      <button class=" btn btn-sm white edit mr-1" (click)="openEditDialog(tarea)">Editar</button>
-      <button class=" btn btn-sm complete white" (click)="complete(tarea)">Completar</button>
+      <button *ngIf="activity.status===0" class=" btn btn-sm start white mr-1" (click)="process(activity)">Comenzar</button>
+      <button *ngIf="activity.status===1" class=" btn btn-sm pause white mr-1" (click)="process(activity)">Pausar</button>
+      <button class=" btn btn-sm white edit mr-1" (click)="openEditDialog(activity)">Editar</button>
+      <button class=" btn btn-sm complete white" (click)="complete(activity)">Completar</button>
     </div>
   </div>
 </div>

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Activity } from 'src/app/activity/activity.model';
-import { ActivityServiceService } from 'src/app/servicessss/activity-service.service';
-
 import { TareaServiceService } from '../services/tarea-service.service';
-import { Tarea } from '../models/tarea.model';
+import { Activity } from '../models/activity.model';
 
 import { MatDialog } from '@angular/material/dialog';
 import { FormEditDialogComponent } from '../form-edit-dialog/form-edit-dialog.component';
@@ -16,12 +13,12 @@ import { FormEditDialogComponent } from '../form-edit-dialog/form-edit-dialog.co
 })
 export class IndexComponent implements OnInit {
 
-  tareas: Tarea[];
+  activities: Activity[];
   order: number;
   filter: number;
 
   constructor(private ts: TareaServiceService, public md: MatDialog) {
-    this.tareas = [];
+    this.activities = [];
     this.order = 3;
     this.filter = 0;
   }
@@ -32,11 +29,11 @@ export class IndexComponent implements OnInit {
 
   getAll(){
     this.ts.getAll().subscribe((res) => {
-      this.tareas = res.map((tarea) => {
+      this.activities = res.map((activity) => {
         return {
-          ...tarea.payload.doc.data() as {},
-          id: tarea.payload.doc.id
-        } as Tarea;
+          ...activity.payload.doc.data() as {},
+          id: activity.payload.doc.id
+        } as Activity;
       });
     });
   }
@@ -44,17 +41,17 @@ export class IndexComponent implements OnInit {
   activityOrder(compare: number){
     if(compare === 0){
       this.order = 0;
-      this.tareas.sort((a,b) =>
+      this.activities.sort((a,b) =>
         a.title.localeCompare(b.title)
       );
     }else if(compare === 1){
       this.order = 1;
-      this.tareas.sort((a,b) =>
+      this.activities.sort((a,b) =>
         (a.date > b.date) ? 1 : -1
       );
     } else {
       this.order = 2;
-      this.tareas.sort((a,b) =>
+      this.activities.sort((a,b) =>
         -(a.priority - b.priority)
       );
     }
@@ -68,11 +65,11 @@ export class IndexComponent implements OnInit {
     this.ts.borrarTarea('todoList',id);
   }
 
-  complete(task: Tarea){
+  complete(task: Activity){
     this.ts.completarTarea(task);
   }
 
-  process(activity: Tarea){
+  process(activity: Activity){
     if(activity.status === 0){
       this.ts.inProcess(activity.id,true);
     } else {
@@ -80,17 +77,17 @@ export class IndexComponent implements OnInit {
     }
   }
 
-  openEditDialog(tarea: any){
-    const tareaUp = {
-      title: tarea.title,
-      description: tarea.description,
-      priority: tarea.priority,
-      status: tarea.status,
-      id: tarea.id,
-      date: tarea.date
+  openEditDialog(activity: any){
+    const activityUp = {
+      title: activity.title,
+      description: activity.description,
+      priority: activity.priority,
+      status: activity.status,
+      id: activity.id,
+      date: activity.date
     }
     const dialogRef = this.md.open(FormEditDialogComponent, {
-      data: tareaUp,
+      data: activityUp,
       width: '400px'
     });
     dialogRef.afterClosed().subscribe(res => {
