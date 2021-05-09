@@ -5,7 +5,7 @@ import { Activity } from '../models/activity.model';
 @Injectable({
   providedIn: 'root'
 })
-export class TareaServiceService {
+export class ActivityServiceService {
 
   constructor(private readonly firebase: AngularFirestore) { }
 
@@ -17,29 +17,29 @@ export class TareaServiceService {
     return this.firebase.collection('completed').snapshotChanges();
   }
 
-  addTarea(payload: Activity){
+  addActivity(payload: Activity){
     return this.firebase.collection('todolist').add(payload);
   }
 
-  updateTarea(payload: Activity){
-    return this.firebase.doc('todolist/'+ payload['id']).update(payload);
+  updateActivity(payload: Activity){
+    return this.firebase.doc('todolist/' + payload['id']).update(payload);
   }
 
-  completarTarea(task: Activity){
+  completeActivity(task: Activity){
     task.date = Date.now();
     this.firebase.collection('completed').add(task);
     this.firebase.doc('todolist/' + task.id).delete();
   }
 
-  borrarTarea(lista: string, id: string){
+  deleteActivity(lista: string, id: string){
     return this.firebase.doc(lista + '/' + id).delete();
   }
 
   inProcess(id: string, process: boolean){
-    if(process){
-      return this.firebase.doc('todolist/' + id).update({status:1});
+    if (process){
+      return this.firebase.doc('todolist/' + id).update({status: 1});
     } else {
-      return this.firebase.doc('todolist/' + id).update({status:0});
+      return this.firebase.doc('todolist/' + id).update({status: 0});
     }
   }
 }

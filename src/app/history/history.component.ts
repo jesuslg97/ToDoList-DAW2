@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TareaServiceService } from '../services/tarea-service.service';
+import { ActivityServiceService } from '../services/activity-service.service';
 import { Activity } from '../models/activity.model';
 
 @Component({
@@ -12,14 +12,14 @@ export class HistoryComponent implements OnInit {
 
   completed: Activity[];
 
-  constructor(private ts: TareaServiceService) { }
+  constructor(private as: ActivityServiceService) { }
 
   ngOnInit(): void {
     this.getAll();
   }
 
   getAll(){
-    this.ts.getCompleted().subscribe((res) => {
+    this.as.getCompleted().subscribe((res) => {
       this.completed = res.map((activity) => {
         return {
           ...activity.payload.doc.data() as {},
@@ -29,8 +29,8 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  eliminar(id: string){
-    this.ts.borrarTarea('completed',id);
+  delete(id: string){
+    this.as.deleteActivity('completed', id);
   }
 
 }
