@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+import { TareaServiceService } from '../services/tarea-service.service';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -13,7 +15,7 @@ export class FormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private ts: TareaServiceService) {
     this.form = new FormGroup({
       title: new FormControl('',[
         Validators.required,
@@ -33,7 +35,7 @@ export class FormComponent implements OnInit {
     if(this.form.valid){
       this.form.value.status = 0;
       this.form.value.date = Date.now();
-      // this.tareasService.addTarea(this.formulario.value);
+      this.ts.addTarea(this.form.value);
       this.form.reset();
     }
   }

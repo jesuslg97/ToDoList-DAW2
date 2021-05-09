@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Activity } from 'src/app/activity/activity.model';
-import { ActivityServiceService } from 'src/app/activity-service.service';
+import { ActivityServiceService } from 'src/app/servicessss/activity-service.service';
+
+import { TareaServiceService } from '../services/tarea-service.service';
+import { Tarea } from '../models/tarea.model';
 
 @Component({
   selector: 'app-index',
@@ -10,12 +13,12 @@ import { ActivityServiceService } from 'src/app/activity-service.service';
 })
 export class IndexComponent implements OnInit {
 
-  activity: Activity[];
+  tareas: Tarea[];
   order: number;
   filter: number;
 
-  constructor(private ActivityService: ActivityServiceService) {
-    this.activity = [];
+  constructor(private ts: TareaServiceService) {
+    this.tareas = [];
     this.order = 3;
     this.filter = 0;
   }
@@ -25,12 +28,12 @@ export class IndexComponent implements OnInit {
   }
 
   getAll(){
-    this.ActivityService.getAll().subscribe((res) => {
-      this.activity = res.map((activity) => {
+    this.ts.getAll().subscribe((res) => {
+      this.tareas = res.map((tarea) => {
         return {
-          ...activity.payload.doc.data() as {},
-          id: activity.payload.doc.id
-        } as Activity;
+          ...tarea.payload.doc.data() as {},
+          id: tarea.payload.doc.id
+        } as Tarea;
       });
     });
   }
@@ -38,17 +41,17 @@ export class IndexComponent implements OnInit {
   activityOrder(compare: number){
     if(compare === 0){
       this.order = 0;
-      this.activity.sort((a,b) =>
+      this.tareas.sort((a,b) =>
         a.title.localeCompare(b.title)
       );
     }else if(compare === 1){
       this.order = 1;
-      this.activity.sort((a,b) =>
+      this.tareas.sort((a,b) =>
         (a.date > b.date) ? 1 : -1
       );
     } else {
       this.order = 2;
-      this.activity.sort((a,b) =>
+      this.tareas.sort((a,b) =>
         -(a.priority - b.priority)
       );
     }
@@ -59,18 +62,18 @@ export class IndexComponent implements OnInit {
   }
 
   deleteActivity(id: string){
-    this.ActivityService.deleteActivity('todoList',id);
+    this.ts.borrarTarea('todoList',id);
   }
 
-  complete(task: Activity){
-    this.ActivityService.completarActivity(task);
+  complete(task: Tarea){
+    this.ts.completarTarea(task);
   }
 
-  process(activity: Activity){
+  process(activity: Tarea){
     if(activity.status === 0){
-      this.ActivityService.inProcess(activity.id,true);
+      this.ts.inProcess(activity.id,true);
     } else {
-      this.ActivityService.inProcess(activity.id,false);
+      this.ts.inProcess(activity.id,false);
     }
   }
 
