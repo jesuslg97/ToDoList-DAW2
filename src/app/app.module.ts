@@ -20,13 +20,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndexComponent } from './index/index.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     FormComponent,
-    IndexComponent
+    IndexComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

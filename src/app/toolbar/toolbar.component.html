@@ -8,8 +8,15 @@
     <mat-icon class="mr">note_add</mat-icon>
     Añadir tarea
   </button>
+
   <button mat-button fxShow.xs=false fxShow.sm=false [routerLink]="['/index']">
     <mat-icon class="mr">sticky_note_2</mat-icon>
     Tareas
   </button>
+
+  <button mat-button fxShow.xs=false [routerLink]="['/history']">
+    <mat-icon class="mr">task_alt</mat-icon>
+    Tareas completadas
+  </button>
+
 </mat-toolbar>
