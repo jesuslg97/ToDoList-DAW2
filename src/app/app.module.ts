@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// Firebase DB
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
@@ -19,8 +20,20 @@ import { FormComponent } from './form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule, } from '@angular/material/input';
+
+// Index component
 import { IndexComponent } from './index/index.component';
+
+// History component
 import { HistoryComponent } from './history/history.component';
+
+// Form Edit Dialog component
+import { FormEditDialogComponent } from './form-edit-dialog/form-edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +41,8 @@ import { HistoryComponent } from './history/history.component';
     ToolbarComponent,
     FormComponent,
     IndexComponent,
-    HistoryComponent
+    HistoryComponent,
+    FormEditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +53,11 @@ import { HistoryComponent } from './history/history.component';
     MatIconModule,
     ReactiveFormsModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

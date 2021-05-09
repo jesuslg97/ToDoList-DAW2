@@ -54,7 +54,7 @@
     <div class="bot-side">
       <button *ngIf="tarea.status===0" class=" btn btn-sm start white mr-1" (click)="process(tarea)">Comenzar</button>
       <button *ngIf="tarea.status===1" class=" btn btn-sm pause white mr-1" (click)="process(tarea)">Pausar</button>
-<!--      <button class=" btn btn-sm white edit mr-1" (click)="openDialog(tarea)">Editar</button>-->
+      <button class=" btn btn-sm white edit mr-1" (click)="openEditDialog(tarea)">Editar</button>
       <button class=" btn btn-sm complete white" (click)="complete(tarea)">Completar</button>
     </div>
   </div>

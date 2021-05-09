@@ -6,6 +6,9 @@ import { ActivityServiceService } from 'src/app/servicessss/activity-service.ser
 import { TareaServiceService } from '../services/tarea-service.service';
 import { Tarea } from '../models/tarea.model';
 
+import { MatDialog } from '@angular/material/dialog';
+import { FormEditDialogComponent } from '../form-edit-dialog/form-edit-dialog.component';
+
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -17,7 +20,7 @@ export class IndexComponent implements OnInit {
   order: number;
   filter: number;
 
-  constructor(private ts: TareaServiceService) {
+  constructor(private ts: TareaServiceService, public md: MatDialog) {
     this.tareas = [];
     this.order = 3;
     this.filter = 0;
@@ -75,6 +78,28 @@ export class IndexComponent implements OnInit {
     } else {
       this.ts.inProcess(activity.id,false);
     }
+  }
+
+  openEditDialog(tarea: any){
+    const tareaUp = {
+      title: tarea.title,
+      description: tarea.description,
+      priority: tarea.priority,
+      status: tarea.status,
+      id: tarea.id,
+      date: tarea.date
+    }
+    const dialogRef = this.md.open(FormEditDialogComponent, {
+      data: tareaUp,
+      width: '400px'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if(!res){
+        console.log(res);
+      } else {
+        this.ts.updateTarea(res);
+      }
+    });
   }
 
 }
