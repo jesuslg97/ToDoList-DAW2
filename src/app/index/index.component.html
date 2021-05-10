@@ -29,32 +29,43 @@
     </div>
 
   </div>
-
+  <h3 *ngIf="activities.length===0">¡Enhorabuena!, en estos momentos no hay actividades</h3>
 </div>
 
-<h3 *ngIf="activities.length===0" class="noTareas">No hay tareas pendientes, ¡Felicidades!</h3>
+<div class="offset-md-2 col-md-10 mt-5 text-center">
+  <table class="table-striped content">
 
-<div class="lista mat-typography">
-  <div class="tarea" *ngFor="let activity of activities">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th colspan="3">Acciones</th>
+      </tr>
+    </thead>
 
-    <div class="top-side">
-      <div class="task">
-        <h1>{{activity.title}}</h1>
-        <h4>{{activity.description}}</h4>
-      </div>
+    <ng-container *ngFor="let activity of activities">
+      <tr class="align-middle">
+        <td>{{activity.title}}</td>
+        <td>{{activity.description}}</td>
+        <td>{{activity.priority}}</td>
+        <td>
+          <span *ngIf="activity.status===0">Pendiente</span>
+          <span *ngIf="activity.status===1">En proceso</span>
+        </td>
+        <td>{{activity.date | date:'HH:mm - d MMM - y'}}</td>
+        <td>
+          <button *ngIf="activity.status===0" style="margin-right: 5px" class="btn btn-sm btn-info" (click)="process(activity)">Comenzar</button>
+          <button *ngIf="activity.status===1" style="margin-right: 5px" class="btn btn-sm btn-warning" (click)="process(activity)">Pausar</button>
+          <button style="margin-right: 5px" class="btn btn-sm btn-dark" (click)="complete(activity)">Completar</button>
+          <button class="btn btn-sm btn-success" (click)="openEditDialog(activity)">Editar</button>
+        </td>
+      </tr>
 
-      <div class="task-info">
-        <p>Prioridad: {{activity.priority}}</p>
-        <p *ngIf="activity.status===0">Estado: Pendiente</p>
-        <p *ngIf="activity.status===1">Estado: En proceso</p>
-        <p>Fecha: {{activity.date | date:'HH:mm - d MMM - y'}}</p>
-      </div>
-    </div>
-    <div class="bot-side">
-      <button *ngIf="activity.status===0" style="margin-right: 5px" class="btn btn-sm btn-info" (click)="process(activity)">Comenzar</button>
-      <button *ngIf="activity.status===1" style="margin-right: 5px" class="btn btn-sm btn-warning" (click)="process(activity)">Pausar</button>
-      <button style="margin-right: 5px" class="btn btn-sm btn-dark" (click)="complete(activity)">Completar</button>
-      <button class="btn btn-sm btn-success" (click)="openEditDialog(activity)">Editar</button>
-    </div>
-  </div>
+    </ng-container>
+
+  </table>
+
 </div>

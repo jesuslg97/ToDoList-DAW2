@@ -3,21 +3,32 @@
   <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto border-dark" style="width: 200px;">
 </div>
 
-<h3 *ngIf="completed.length===0" class="noTareas">No se han completado tareas, ¡A trabajar!</h3>
+<h3 *ngIf="completed.length===0">¡Ups...!, no hay actividades completadas</h3>
 
-<div class="lista mat-typography">
-  <div class="tarea" *ngFor="let activity of completed">
-    <div class="top-side">
-      <div class="task">
-        <h1>{{activity.title}}</h1>
-        <h4>{{activity.description}}</h4>
-      </div>
-      <div class="task-info">
-        <p>Completada: {{activity.date | date:'HH:mm - d MMM - y'}}</p>
-      </div>
-    </div>
-    <div class="bot-side">
-      <button class="btn btn-sm btn-danger" (click)="delete(activity.id)">Eliminar</button>
-    </div>
-  </div>
+<div class="offset-2 col-md-12 mt-5 text-center">
+  <table class="table-striped content">
+
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Fecha Completada</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <ng-container *ngFor="let activity of completed">
+      <tr class="align-middle">
+        <td>{{activity.title}}</td>
+        <td>{{activity.description}}</td>
+        <td>{{activity.date | date:'HH:mm - d MMM - y'}}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="delete(activity.id)">Eliminar</button>
+        </td>
+      </tr>
+
+    </ng-container>
+
+  </table>
+
 </div>

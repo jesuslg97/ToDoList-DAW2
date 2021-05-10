@@ -1,49 +1,37 @@
-<h2 mat-dialog-title class="title">Editar tarea</h2>
+<h2 mat-dialog-title class="text-center">Editar tarea</h2>
 
-<mat-dialog-content [formGroup]="form" class="formbody">
+<mat-dialog-content [formGroup]="form">
 
   <form>
     <div class="form-group">
       <label for="title" class="form-label">Título</label>
-      <input
-        type="text"
-        id="title"
-        formControlName="title"
-        class="form-control"
-        placeholder="Introduce un título corto"
-        [(ngModel)]="activity.title"
-      >
-      <div class="error" *ngIf="form.controls.title.errors?.required && form.controls.title.touched">
-        Este campo es requerido
+      <input type="text" id="title" formControlName="title" class="form-control" placeholder="..."
+        [(ngModel)]="activity.title">
+      <div style="color: red" *ngIf="form.controls.title.errors?.required && form.controls.title.touched">
+        ¡Campo obligatorio!
       </div>
-      <div class="error" *ngIf="form.controls.title.errors?.maxlength && form.controls.title.touched">
-        No puede tener más de 15 caracteres
+      <div style="color: red" *ngIf="form.controls.title.errors?.maxlength && form.controls.title.touched">
+        ¡Máximo 15 carácteres!
       </div>
     </div>
+
     <div class="form-group">
       <label for="description" class="form-label">Descripción</label>
-      <input
-        type="text"
-        id="description"
-        formControlName="description"
-        class="form-control"
-        placeholder="Introduce una descripción"
-        [(ngModel)]="activity.description"
-      >
+      <input type="text" id="description" formControlName="description" class="form-control"
+        placeholder="Opcional" [(ngModel)]="activity.description">
     </div>
+
     <div class="form-group">
       <label class="form-label">Prioridad</label>
-      <select
-        class="form-control"
-        formControlName="priority"
-        [(ngModel)]="activity.priority"
-      >
+      <select class="form-control" formControlName="priority" [(ngModel)]="activity.priority">
         <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" value="{{i}}">{{i}}</option>
       </select>
     </div>
+
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button class="mat-raised-button mat-accent mr-2" mat-dialog-close="false">Cerrar</button>
+
+<mat-dialog-actions class="row col-md-6 offset-3 text-center">
   <button class="mat-raised-button mat-primary" type="submit" [mat-dialog-close]="formValidate()">Actualizar</button>
+  <button class="mat-raised-button mat-accent mt-2" mat-dialog-close="false">Cerrar</button>
 </mat-dialog-actions>
