@@ -61,10 +61,6 @@ export class IndexComponent implements OnInit {
     this.filter = filtro;
   }
 
-  deleteActivity(id: string){
-    this.as.deleteActivity('todoList', id);
-  }
-
   complete(task: Activity){
     this.as.completeActivity(task);
   }
