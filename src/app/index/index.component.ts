@@ -58,7 +58,15 @@ export class IndexComponent implements OnInit {
   }
 
   activityFilter(filtro: number){
-    this.filter = filtro;
+    if (filtro === 1) {
+      this.filter = 1;
+      this.activities.sort((a, b) =>
+        -(a.status - b.status));
+    }else if (filtro === 2) {
+      this.filter = 2;
+      this.activities.sort((a, b) =>
+        -(a.status - b.status) ? 1 : -1);
+    }
   }
 
   complete(task: Activity){
