@@ -11,8 +11,12 @@ import { Activity } from '../models/activity.model';
 export class HistoryComponent implements OnInit {
 
   completed: Activity[];
+  order: number;
 
-  constructor(private as: ActivityServiceService) { }
+  constructor(private as: ActivityServiceService) {
+    this.completed = [];
+    this.order = 2;
+  }
 
   ngOnInit(): void {
     this.getAll();
@@ -31,6 +35,20 @@ export class HistoryComponent implements OnInit {
 
   delete(id: string){
     this.as.deleteActivity('completed', id);
+  }
+
+  activityOrder(compare: number){
+    if (compare === 0){
+      this.order = 0;
+      this.completed.sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+    }else if (compare === 1){
+      this.order = 1;
+      this.completed.sort((a, b) =>
+        (a.date > b.date) ? 1 : -1
+      );
+    }
   }
 
 }

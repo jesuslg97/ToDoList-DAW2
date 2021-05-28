@@ -3,9 +3,24 @@
   <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto border-dark" style="width: 200px;">
 </div>
 
-<h3 *ngIf="completed.length===0">¡Ups...!, no hay actividades completadas</h3>
+<div class="row text-center">
 
-<div class="offset-2 col-md-12 mt-5 text-center">
+  <div class="col-md-12" style="margin-left: 40px">
+    <mat-form-field appearance="fill" style="margin-right: 5%">
+      <mat-label>Ordenar por:</mat-label>
+      <select matNativeControl>
+        <option value="Default" selected>Default</option>
+        <option (click)="activityOrder(0)" value="Título">Título</option>
+        <option (click)="activityOrder(1)" value="Fecha">Fecha</option>
+      </select>
+    </mat-form-field>
+  </div>
+
+  <h3 *ngIf="completed.length===0">¡Ups...!, no hay actividades completadas</h3>
+
+</div>
+
+<div class="row justify-content-center col-md-12 mt-3 text-center">
   <table class="table-striped content">
 
     <thead>
