@@ -1,27 +1,48 @@
-# TodoList
+# TodoList - Aspectos técnicos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
+Versión de Angular empleada ==> 11.2.10
 
-## Development server
+Versión de Node empleada ==> 14.15.1
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+-----------------------------------------------------------------------------------
+El proyecto dispone de 5 componentes, 1 modelo y 1 servicio:
 
-## Code scaffolding
+  •	Componentes:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+   o	ToolBar ==> Almacena todo el código relacionado con la barra de navegación.
 
-## Build
+   o	Index ==> Almacena todo el código relacionado con la lista de todas las actividades pendientes, que pueden ser ordenadas por título, fecha, prioridad y por estados.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+   o	Form ==> Almacena todo el código relacionado con el formulario para crear una actividad, incluyendo título, fecha y prioridad.
 
-## Running unit tests
+   o	Form-edit-dialog ==> Almacena todo el código relacionado con el formulario para editar cualquier actividad pendiente en el componente Index.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   o	History ==> Almacena todo el código relacionado con la lista de las actividades completadas, que pueden ser ordenadas por título y fecha.
 
-## Running end-to-end tests
+----------------------------------------------------------------------------
+  
+  •	Modelo:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+   o	Almacena todo el código relacionado con las diferentes variables que representan a una actividad (título, descripción, estado…).
 
-## Further help
+  ----------------------------------------------------------------------------
+  
+  •	Servicio:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   o	Almacena todo el código relacionado con la base de datos, para almacenar toda la información de las diferentes.
+
+----------------------------------------------------------------------------
+
+# Base de datos
+Como base de datos, he usado Google Firebase para almacenar toda la información necesaria para la creación de una actividad, 
+por lo que he tenido que instalar la librería @angular/fire en mi proyecto.
+
+
+# Angular Material
+Con respecto a la librería de Angular Material, he usado los siguientes componentes:
+
+1.	MatToolbarModule ==> Para la barra de navegación.
+2.	MatIconModule ==> Para los iconos de la barra de navegación.
+3.	MatButtonModule ==> Para los botones de todas las páginas de la app.
+4.	MatInputModule ==> Para los inputs de los formularios.
+5.	MatFormFieldModule ==> Para el estilo de los inputs de los formularios.
