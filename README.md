@@ -33,12 +33,12 @@ El proyecto dispone de 5 componentes, 1 modelo y 1 servicio:
 
 ----------------------------------------------------------------------------
 
-# Base de datos
+## Base de datos
 Como base de datos, he usado Google Firebase para almacenar toda la información necesaria para la creación de una actividad, 
 por lo que he tenido que instalar la librería @angular/fire en mi proyecto.
 
 
-# Angular Material
+## Angular Material
 Con respecto a la librería de Angular Material, he usado los siguientes componentes:
 
 1.	MatToolbarModule ==> Para la barra de navegación.
